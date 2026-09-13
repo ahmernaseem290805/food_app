@@ -1,4 +1,4 @@
-import React, {
+import {
   useContext,
   useEffect,
   useState,
@@ -26,7 +26,6 @@ import {
 import { AuthContext } from "../Context/AuthContext";
 
 import {
-  auth,
   db,
 } from "../../firebase/firebaseConfig";
 

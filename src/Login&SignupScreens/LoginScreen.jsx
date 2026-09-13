@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { EnvelopeIcon, LockClosedIcon } from 'react-native-heroicons/outline';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
