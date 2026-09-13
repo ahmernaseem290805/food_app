@@ -1,0 +1,13 @@
+"use client";
+import {useEffect,useState} from "react";
+import {doc,getDoc,setDoc,serverTimestamp} from "firebase/firestore";
+import {db} from "../../lib/firebase";
+import AdminShell from "../components/AdminShell";
+export default function SettingsPage(){
+ const [form,setForm]=useState({restaurantName:"Jafz Go Karo",logo:"",address:"",phone:"",openingTime:"10:00 AM",closingTime:"12:00 AM",deliveryFee:"0",deliveryRadiusKm:"10",isOpen:true});
+ const [saving,setSaving]=useState(false);
+ useEffect(()=>{getDoc(doc(db,"RestaurantSettings","main")).then(s=>{if(s.exists())setForm(f=>({...f,...s.data()}))})},[]);
+ const set=(k,v)=>setForm(f=>({...f,[k]:v}));
+ const save=async()=>{setSaving(true);try{await setDoc(doc(db,"RestaurantSettings","main"),{...form,deliveryFee:Number(form.deliveryFee),deliveryRadiusKm:Number(form.deliveryRadiusKm),updatedAt:serverTimestamp()},{merge:true});alert("Restaurant settings saved.")}finally{setSaving(false)}};
+ return <AdminShell><main className="page"><h1>Restaurant Settings</h1><p className="subtitle">Control restaurant information and delivery coverage.</p><section className="card"><div className="formGrid"><div className="field"><label>Restaurant name</label><input value={form.restaurantName} onChange={e=>set("restaurantName",e.target.value)}/></div><div className="field"><label>Phone</label><input value={form.phone} onChange={e=>set("phone",e.target.value)}/></div><div className="field full"><label>Address</label><input value={form.address} onChange={e=>set("address",e.target.value)}/></div><div className="field"><label>Opening time</label><input value={form.openingTime} onChange={e=>set("openingTime",e.target.value)}/></div><div className="field"><label>Closing time</label><input value={form.closingTime} onChange={e=>set("closingTime",e.target.value)}/></div><div className="field"><label>Delivery fee</label><input type="number" min="0" value={form.deliveryFee} onChange={e=>set("deliveryFee",e.target.value)}/></div><div className="field"><label>Accept orders within (km)</label><input type="number" min="0" step="0.5" value={form.deliveryRadiusKm} onChange={e=>set("deliveryRadiusKm",e.target.value)}/></div><div className="field"><label>Logo URL</label><input value={form.logo} onChange={e=>set("logo",e.target.value)}/></div></div><label style={{display:"flex",gap:8,alignItems:"center",margin:"8px 0 18px"}}><input type="checkbox" checked={form.isOpen} onChange={e=>set("isOpen",e.target.checked)}/> Restaurant is currently open</label><button className="primary" disabled={saving} onClick={save}>{saving?"Saving...":"Save Settings"}</button></section></main></AdminShell>
+}

@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "food_app",
+    "slug": "food_app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/AppIcon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/FoodAppSplashicon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#333333"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.food_app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSLocationWhenInUseUsageDescription": "Jafz Go Karo uses your location to show your city/area and determine delivery availability.",
+        "NSPhotoLibraryUsageDescription": "Jafz Go Karo uses your photos to set your profile picture."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/Adap.png",
+        "backgroundColor": "#333333"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.food_app",
+      "softwareKeyboardLayoutMode": "pan",
+      "statusBar": {
+        "barStyle": "light-content",
+        "backgroundColor": "#FF6B00"
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "READ_MEDIA_IMAGES"
+      ]
+    },
+    "plugins": [
+      "expo-image-picker",
+      "expo-location"
+    ]
+  }
+}

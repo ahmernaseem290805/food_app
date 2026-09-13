@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path D:\\\\ReactNativeJS\\\\food_app\\\\src -Recurse -File | Where-Object { $_.FullName -notmatch 'node_modules' } | Select-Object FullName)",
+      "WebFetch(domain:docs.expo.dev)",
+      "PowerShell(\\(Get-Item CLAUDE.md\\).LastWriteTime = Get-Date)"
+    ]
+  }
+}

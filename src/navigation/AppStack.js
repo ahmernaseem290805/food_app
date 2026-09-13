@@ -1,0 +1,20 @@
+import React from "react";
+import { StyleSheet } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import HomeScreen from "../MainScreens/HomeScreen";
+import ProductScreen from "../MainScreens/ProductScreen";
+import UserCartScreen from "../MainScreens/UserCartScreen";
+import TrackOrderScreen from "../MainScreens/TrackOrderScreen";
+import UserProfile from "../MainScreens/UserProfile";
+import AccountAndSettings from "../MainScreens/AccountAndSettings";
+import CategoriesScreen from "../MainScreens/CategoriesScreen";
+import AllProductsScreen from "../MainScreens/AllProductsScreen";
+import SearchScreen from "../MainScreens/SearchScreen";
+import { colors } from "../design/theme";
+const Stack=createNativeStackNavigator(); const Tab=createBottomTabNavigator();
+const HomeStack=()=> <Stack.Navigator screenOptions={{headerShown:false}}><Stack.Screen name="HomeMain" component={HomeScreen}/><Stack.Screen name="Search" component={SearchScreen}/><Stack.Screen name="Categories" component={CategoriesScreen}/><Stack.Screen name="AllProducts" component={AllProductsScreen}/><Stack.Screen name="ProductScreen" component={ProductScreen}/></Stack.Navigator>;
+const icons={Home:"home",Cart:"cart",Profile:"person",TrackOrder:"bicycle",Settings:"settings"};
+export default function AppStack(){return <Tab.Navigator screenOptions={({route})=>({headerShown:false,tabBarActiveTintColor:colors.primary,tabBarInactiveTintColor:"#999",tabBarStyle:styles.tab,tabBarLabelStyle:styles.label,tabBarIcon:({color,size})=><Ionicons name={icons[route.name]} size={size} color={color}/>})}><Tab.Screen name="Home" component={HomeStack}/><Tab.Screen name="Cart" component={UserCartScreen}/><Tab.Screen name="TrackOrder" component={TrackOrderScreen} options={{title:"Orders"}}/><Tab.Screen name="Profile" component={UserProfile}/><Tab.Screen name="Settings" component={AccountAndSettings}/></Tab.Navigator>}
+const styles=StyleSheet.create({tab:{height:66,paddingTop:6,paddingBottom:8,backgroundColor:"#FFF",borderTopWidth:0},label:{fontSize:10,fontWeight:"700"}});
